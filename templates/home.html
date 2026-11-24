@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<h1><span style="color: rgb(105, 105, 243);">Task</span> Manager</h1>
+   <!-- <form action="{% url 'send_hello' %}" method="post">
+    {% csrf_token %}
+    <button style="width: 200px;" type="submit">Send to Email </button>
+    </form> -->
+<div class="container">
+
+    <div class="profile-card">
+        <h1>Welcome, {{ request.user.username }}!</h1>
+        <p>Manage your tasks easily.</p>
+
+        <a href="{% url 'add_task' %}" class="btn add-btn">
+            Create Task
+        </a>
+        <a href="{% url 'tasks' %}" class="btn">
+            Read Tasks
+        </a>
+
+        <a href="{% url 'profile' %}" class="btn edit-btn">
+            My Profile
+        </a>
+           <form action="{% url 'send_hello' %}" method="post">
+             {% csrf_token %}
+            <button style="width: 250px; background-color: rgb(48, 224, 48);margin-top: 0px;" type="submit">Send to Email </button>
+
+        <a href="{% url 'logout' %}" class="btn delete-btn">
+            Logout
+        </a>
+    </div>
+
+    <div class="my-tasks">
+        <h1>My Tasks</h1>
+
+        {% for task in tasks %}
+            <div class="task-card">
+                <h2>{{ task.title }}</h2>
+                <p>{{ task.caption }}</p>
+
+                <div class="actions">
+                    <a href="{% url 'edit_task' task.id %}" class="btn edit-btn">
+                        Update
+                    </a>
+
+                    <form method="POST" action="{% url 'delete_task' task.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn delete-btn">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% empty %}
+            <div class="empty-message">
+                You don't have any tasks yet!
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Email</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Verify Your Email</h1>
+
+            <p class="auth-description">
+                Enter your username and the verification code sent to your email.
+            </p>
+
+            <form action="{% url 'confirm_email' %}" method="POST">
+
+                {% csrf_token %}
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username..."
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="code"
+                    placeholder="Verification Code..."
+                    maxlength="6"
+                    required
+                >
+
+                <button type="submit" class="btn verify-btn">
+                    Confirm Email
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

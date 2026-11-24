@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="profile-card">
+
+        <div class="profile-avatar">
+            {{ request.user.username|first|upper }}
+        </div>
+
+        <h1>My Profile</h1>
+
+        <div class="profile-info">
+            <div class="info-item">
+                <span>Username</span>
+                <h3>{{ request.user.username }}</h3>
+            </div>
+
+            <div class="info-item">
+                <span>Email</span>
+                <h3>{{ request.user.email }}</h3>
+            </div>
+        </div>
+
+        <div class="logout-box">
+            <h3>Account</h3>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+             </a>
+            <a href="{% url 'home' %}" class="btn ">
+            Back home
+        </a>
+        </div>
+
+    </div>
+
+    <div class="my

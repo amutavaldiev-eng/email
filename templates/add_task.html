@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Create New Task</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Task Title</label>
+        <input
+            type="text"
+            name="title"
+            placeholder="Enter task title"
+            required
+        >
+        <label>Description</label>
+        <textarea
+            name="caption"
+            placeholder="Enter task description"
+            required
+        ></textarea>
+        <button type="submit" class="btn add-btn">
+            Create Task
+        </button>
+        <a href="{% url 'tasks' %}" class="btn cancel-btn">
+            Cancel
+        </a>
+            <a href="{% url 'home' %}" class="btn ">
+            Back home
+        </a>
+            
+
+    </form>
+
+</div>
+
+</body>
+</html>

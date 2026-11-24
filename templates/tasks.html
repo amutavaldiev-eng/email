@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>My Tasks</h1>
+
+    <a href="{% url 'add_task' %}" class="btn add-btn">
+        + Add New Task
+    </a>
+
+    {% for task in tasks %}
+
+        <div class="task-card">
+
+            <h2>{{ task.title }}</h2>
+
+            <p>{{ task.caption }}</p>
+
+            <span class="task-date">
+                Created: {{ task.created_at }}
+            </span>
+
+            <div class="actions">
+
+                <a href="{% url 'edit_task' task.id %}"
+                   class="btn edit-btn">
+                    Edit
+                </a>
+
+                <form method="POST"
+                      action="{% url 'delete_task' task.id %}">
+                    {% csrf_token %}
+
+                    <button type="submit" class="btn delete-btn">
+                        Delete
+                    </button>
+                     </a>
+            <a href="{% url 'home' %}" class="btn ">
+            Back home
+        </a>
+                </form>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="empty-message">
+            <h3>You don't have any tasks yet.</h3>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
